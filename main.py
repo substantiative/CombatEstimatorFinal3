@@ -29,8 +29,8 @@ def rollInit(pc, npc):
     #returns str pc if pc goes first, string npc if npc goes first
     #todo later: handle equal rolls better, right now a tie goes in favor
     #of the pc
-    rollPc = dBag.d10(1,0) #roll 1d10+0
-    rollNpc = dBag.d10(1,0)
+    rollPc = dBag.d10() #roll 1d10+0
+    rollNpc = dBag.d10()
     ### VVVVVVVV IS IT pc.initMod OR pc.initmod() ###
     # VVVV if NPC wins initaitve roll
     if ((rollPc + pc.initMod) > (rollNpc + npc.initMod)): 
@@ -125,7 +125,7 @@ while (player.currentHp > 0 and gobbo.currentHp >0):
     #while no one is dead
     combatRound(player, gobbo, initWin)
     x = statusUpdate(player, gobbo)
-    print(statusUpdate)
+    print(x)
 if (player.currentHp <= 0):
     print('Drizzit Loses!')
 if (gobbo.currentHp <= 0):

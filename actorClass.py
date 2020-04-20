@@ -52,11 +52,8 @@ class Actor:
         self.currentHp = self.currentHp - incoming
         
     def setHp(self):
-        #todo later: reroll 1's
-        baseHp = 0
-        for x in range(0, self.hd[0]):
-            baseHp += random.randint(1, self.hd[1]) + self.hdMod
-        self.maxHp = baseHp
+        self.maxHp = sum([random.randint(1, self.hd[1]) + self.hdMod for \
+                          i in range(self.hd[0])])
 
     def attack(self, target):
         #Checks to see if the actor hits a target
@@ -65,7 +62,7 @@ class Actor:
         #         0 if miss
         #         1 if hit
         #         2 if critical hit
-        atkRoll = dBag.d20(1,0)#rolls a 1d20
+        atkRoll = dBag.d20()#rolls a 1d20
         ac = target.ac
         thac0 = self.thac0
         if (atkRoll == 1): #if critical miss, return -1
