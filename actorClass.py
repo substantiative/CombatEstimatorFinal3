@@ -52,7 +52,7 @@ class Actor:
         self.currentHp = self.currentHp - incoming
         
     def setHp(self):
-        self.maxHp = sum([random.randint(1, self.hd[1]) + self.hdMod for \
+        self.currentHp = sum([random.randint(1, self.hd[1]) + self.hdMod for \
                           i in range(self.hd[0])])
 
     def attack(self, target):
