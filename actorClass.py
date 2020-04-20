@@ -13,6 +13,7 @@
 #   incorporate different attacks (e.x. 2x 1d4 claw, 1x1d12 bite)
 #   incorporate status effects (stunned, slowed, etc)           
 import random
+import dBag
 
 class Actor:
     ###AVAILABLE METHODS###
@@ -54,7 +55,7 @@ class Actor:
         #todo later: reroll 1's
         baseHp = 0
         for x in range(0, self.hd[0]):
-            baseHp += random.randint(0, self.hd[1]) + self.hdMod
+            baseHp += random.randint(1, self.hd[1]) + self.hdMod
         self.maxHp = baseHp
 
     def attack(self, target):
@@ -64,7 +65,7 @@ class Actor:
         #         0 if miss
         #         1 if hit
         #         2 if critical hit
-        atkRoll = random.randint(1,20) #rolls a 1d20
+        atkRoll = dBag.d20(1,0)#rolls a 1d20
         ac = target.ac
         thac0 = self.thac0
         if (atkRoll == 1): #if critical miss, return -1
@@ -81,15 +82,12 @@ class Actor:
     def dmgCalc(self):
         #rolls for damage, adds modifiers
         #returns an int representing damage dealt by the actor
-        x = self.dmgRng[0] #number of dice rolled
-        ### OR IS IT self.dmgRng[0] ###
-        y = self.dmgRng[1] #number of sides of the damage dice
-        ###OR IS IT self.dmgRng[1]###
-        z = self.dmgMod
-        ###OR IS IT self.dmgMod###
+        numberRolled = self.dmgRng[0] #number of dice rolled
+        diceSides = self.dmgRng[1] #number of sides of the damage dice
+        modifier = self.dmgMod
         baseDmg = 0
-        for i in range(0, x):
-            baseDmg += random.randint(1, y) + z
+        for i in range(0, numberRolled):
+            baseDmg += (random.randint(1, diceSides) + modifier)
         return baseDmg
     
         

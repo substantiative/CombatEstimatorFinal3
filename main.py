@@ -10,16 +10,17 @@
 #import json
 import actorClass
 import random
-import dbag
+import dBag
 
 ### TODO NEXT: HAVE ACTORS BE READ FROM A JSON TO BE LOADED ###
 ### THE ACTORS WILL BE HARDCODED FIRST TO TEST ACTOR CLASS FUNCTIONALITY ###
 ### AND ROUND IMPLEMENTATION ###
-#actor1 = str
-#actor2 = str
-#userInput1 = input('type the exact file name of the already created PC json: ')
-#userInput2 = input('type the exact file name of the already created NPC json: ')
-###
+
+
+### dBag Methods! ###
+### to use your dbag, follow this format ###
+### dbag.dx(number of dice, modifier) ###
+### d4, d6, d8,d10,d12,d20,d100 ### 
 
 
 def rollInit(pc, npc):
@@ -28,8 +29,8 @@ def rollInit(pc, npc):
     #returns str pc if pc goes first, string npc if npc goes first
     #todo later: handle equal rolls better, right now a tie goes in favor
     #of the pc
-    rollPc = random.randrange(1,10)
-    rollNpc = random.randrange(1,10)
+    rollPc = dBag.d10(1,0) #roll 1d10+0
+    rollNpc = dBag.d10(1,0)
     ### VVVVVVVV IS IT pc.initMod OR pc.initmod() ###
     # VVVV if NPC wins initaitve roll
     if ((rollPc + pc.initMod) > (rollNpc + npc.initMod)): 
